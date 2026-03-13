@@ -1,29 +1,28 @@
-# Large Print Word Search Generator
+# Large Print Wordsearch Generator
 
-A sleek, modern web application designed to generate highly customizable, large-print Word Search puzzles dynamically. Built specifically with printable, Letter-sized PDF generation in mind, it guarantees high-contrast output with zero repeated words—perfect for casual puzzle solvers, teachers, or care facility coordinators.
+A sleek, modern web application designed to generate highly customizable, large-print Word Search puzzles dynamically. Built specifically with printable, Letter-sized PDF generation in mind, it guarantees high-contrast output for easy reading.
 
 ## Features
 
-- **Massive Word Themes**: Choose from deep categories like Animals, Space Exploration, World Geography, and Cooking, each packed with over 500 unique words.
-- **Customizable Grids**: Adjust rows, columns, and the number of words per puzzle to fine-tune the difficulty. Scaling all the way up to dense 35x35 arrays!
+- **Dynamic Word Themes**: Choose from a variety of built-in themes like Animals, Space, and Cooking.
+- **Discover New Themes**: Generate brand new, random themes on the fly. The app will automatically find a theme with enough words to generate a puzzle.
+- **API-Powered**: Theme words are fetched on-demand from the Datamuse API, ensuring fresh and relevant word lists.
+- **Customizable Grids**: Adjust rows, columns, and the number of words per puzzle to fine-tune the difficulty.
 - **Accessibility Focused**: Both the hidden grid words and the resulting word list can have their font sizes individually tuned via sliding scales. 
-- **Bulk Generation**: Generate up to 10 unique, non-repeating puzzles from a single theme at once.
-- **Flawless Printing**: The UI cleanly vanishes and applies strict `-webkit-print-color-adjust` logic so standard browser "Save to PDF" tools or direct Letter printing produces perfectly isolated pages with default margins.
+- **Bulk Generation**: Generate up to 10 unique puzzles from a single theme at once.
+- **Flawless Printing**: The UI cleanly vanishes, allowing your browser's "Save to PDF" or print functions to produce perfectly formatted, letter-sized pages.
 
 ## Technology Stack
 
 - **Vanilla JavaScript**: Pure ES6 modules, zero heavy framework overhead.
 - **Vite**: Blazing fast HMR and optimized production bundling.
-- **CSS3 Variables**: Clean, dark-mode inspired glassmorphism design for the web interface and high-contrast toggles for print media queries.
-- **Google Fonts**: Utilizes the modern `Outfit` font for stellar readability.
+- **Docker & Nginx**: The production app is served from a lightweight, multi-stage Nginx container.
+- **GitHub Actions**: A full CI/CD pipeline automatically builds, tests, and deploys the Docker image.
+- **CSS3 Variables**: Clean, dark-mode inspired design for the web interface and high-contrast styles for print.
 
 ## Getting Started
 
-### Prerequisites
-
-You need Node.js installed on your machine to use Vite for the local development server.
-
-### Installation
+### Running Locally
 
 1. Clone the repository:
    ```bash
@@ -43,15 +42,28 @@ You need Node.js installed on your machine to use Vite for the local development
    ```
 5. Open your browser to the local address provided (usually `http://localhost:5173`).
 
-## Usage
+### Running with Docker
 
-1. Select a **Theme** from the dropdown menu in the sidebar.
-2. Customize your **Rows** and **Columns** for the desired density.
-3. Use the sliders to adjust the **Puzzle Font Size** and **Word List Font Size**.
-4. Define the **Max Words per Puzzle** and the **Number of Puzzles** you wish to generate in bulk.
-5. Click **Generate Puzzle(s)**.
-6. Once satisfied with the layout preview, click the **Save as PDF / Print** button to open your browser's native print dialog.
+Once the image is pushed to Docker Hub by the CI/CD pipeline, you can run the production application easily.
 
-## License
+1. Pull the latest image from Docker Hub (replace `rampeand` with the correct Docker Hub username if different):
+   ```bash
+   docker pull rampeand/large-print-wordsearch-generator:latest
+   ```
+2. Run the container, mapping your local port 8080 to the container's port 80:
+   ```bash
+   docker run -p 8080:80 rampeand/large-print-wordsearch-generator:latest
+   ```
+3. Open your browser to `http://localhost:8080`.
 
-This project is open-source and free to use.
+## CI/CD Pipeline
+
+This project uses GitHub Actions to automate the build, test, and deployment of the Docker container. On every push to the `main` branch, the workflow will:
+1.  Build the Docker image.
+2.  Run the container in a test environment.
+3.  Verify the container is serving content correctly.
+4.  If the tests pass, tag and push the image to Docker Hub.
+
+**IMPORTANT**: For the final push to Docker Hub to succeed, you must configure the following secrets in your GitHub repository settings under **Settings > Secrets and variables > Actions**:
+- `DOCKERHUB_USERNAME`: Your Docker Hub username.
+- `DOCKERHUB_TOKEN`: An access token generated from your Docker Hub account settings.
