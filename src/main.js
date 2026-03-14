@@ -1,6 +1,15 @@
 import { WordSearchGenerator } from './generator.js';
 import { themes } from './themes.js';
 
+function updatePageZoom() {
+  const pageWidthPx = 8.5 * 96; // 8.5in at 96dpi = 816px
+  const available = window.innerWidth - 32; // 16px padding each side
+  const zoom = Math.min(1, available / pageWidthPx);
+  document.documentElement.style.setProperty('--page-zoom', zoom.toFixed(3));
+}
+window.addEventListener('resize', updatePageZoom);
+updatePageZoom();
+
 document.addEventListener('DOMContentLoaded', () => {
   const themeSelect = document.getElementById('theme');
   const rowsInput = document.getElementById('rows');

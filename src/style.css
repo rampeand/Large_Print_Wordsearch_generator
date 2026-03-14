@@ -266,6 +266,95 @@ input[type="range"] {
   letter-spacing: 1px;
 }
 
+/* ── Mobile styles ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body {
+    overflow-y: auto;
+  }
+
+  #app {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    overflow-y: visible;
+    padding: 1rem;
+  }
+
+  .sidebar-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-header h1 {
+    font-size: 1.4rem;
+    white-space: nowrap;
+  }
+
+  .sidebar-header h1 br {
+    display: none;
+  }
+
+  .sidebar-header span {
+    font-size: 1rem;
+  }
+
+  .controls-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Theme select spans full width */
+  .controls-container .control-group:first-child {
+    grid-column: span 2;
+  }
+
+  /* Rows/cols group spans full width (it has its own internal two-col layout) */
+  .row-col-group {
+    grid-column: span 2;
+  }
+
+  .action-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 0;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .preview-area {
+    padding: 1rem;
+    justify-content: flex-start;
+  }
+
+  .preview-wrapper {
+    width: 100%;
+  }
+
+  /* Scale the letter-sized page to fit the viewport using a JS-set CSS var */
+  .page {
+    zoom: var(--page-zoom, 0.44);
+    margin: 0 auto;
+  }
+}
+/* ────────────────────────────────────────────────────────── */
+
 /* Print specific styles */
 @media print {
   body {
