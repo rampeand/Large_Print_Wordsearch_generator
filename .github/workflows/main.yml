@@ -19,12 +19,12 @@ jobs:
         run: docker build . --tag test-image:latest
 
       - name: Run container for testing
-        run: docker run -d --name test-container -p 8080:80 test-image:latest
+        run: docker run -d --name test-container -p 8081:80 test-image:latest
 
       - name: Test container accessibility
         # Give the container a moment to start up, then test with curl.
         # The --fail flag causes curl to exit with an error if the HTTP request fails.
-        run: sleep 10 && curl --fail http://localhost:8080
+        run: sleep 10 && curl --fail http://localhost:8081
       
       - name: Log in to Docker Hub
         # IMPORTANT: You must configure these secrets in your GitHub repository settings.

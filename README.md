@@ -1,5 +1,7 @@
 # Large Print Wordsearch Generator
 
+**Live Demo:** [wordsearch.andre.systems](https://wordsearch.andre.systems)
+
 A sleek, modern web application designed to generate highly customizable, large-print Word Search puzzles dynamically. Built specifically with printable, Letter-sized PDF generation in mind, it guarantees high-contrast output for easy reading.
 
 ## Features
@@ -52,9 +54,9 @@ Once the image is pushed to Docker Hub by the CI/CD pipeline, you can run the pr
    ```
 2. Run the container, mapping your local port 8080 to the container's port 80:
    ```bash
-   docker run -p 8080:80 rampeand/large-print-wordsearch-generator:latest
+   docker run -p 8081:80 rampeand/large-print-wordsearch-generator:latest
    ```
-3. Open your browser to `http://localhost:8080`.
+3. Open your browser to `http://localhost:8081`.
 
 ## CI/CD Pipeline
 
